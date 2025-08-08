@@ -1,11 +1,13 @@
-import React from 'react'
-import { Navbar } from '../components/Navbar'
+import React, { useEffect } from 'react'
 
- const Home = () => {
+const Home = () => {
+  
+  useEffect(()=>{
+
+  },[])
   return (
     <>
-    <Navbar />
-  
+      Home
     </>
   )
 }

@@ -1,94 +1,104 @@
-import React from 'react'
-import { Box, AppBar, Typography, Badge } from '@mui/material'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Box, AppBar, Typography, Badge } from '@mui/material';
+import { Link } from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Logo } from './Logo';
+import theme from './ThemeProvider';
+
+
 
 export const Navbar = () => {
-    return (
-        <Box sx={{ flexGrow: 1 }}>
-            <NavbarMain position="static" >
+  return (
+    <Box sx={{ flexGrow: 1 }}>
+      <NavbarMain position="static">
+        <NavInnerBox>
+            <StyledLink to="/">
+            <Logo />
+            </StyledLink>
+          <LinkBox>
+            <StyledLink to="/wishlist">
+              <FavoriteBorderIcon sx={theme.MuiIcon} />
+              <Typography sx={linkTypographyStyle}>Wishlist</Typography>
+            </StyledLink>
 
-                <NavInnerBox>
+            <StyledLink to="/cart">
+              <Badge badgeContent={4} color='warning'>
+                <ShoppingCartIcon sx={theme.MuiIcon} />
+              </Badge>
+              <Typography sx={linkTypographyStyle}>Cart</Typography>
+            </StyledLink>
 
-                    <Logo />
-                    <LinkBox>
-                        <Link to='/wishlist' style={{ textTransform: 'none', textDecoration: 'none', color: '#202020',display:'flex',alignItems:'center',gap:'10px' }}  >
-                            <FavoriteBorderIcon style={{width:'60px',height:'60px'}}/>
-                            <Typography className='linkname'>Wishlist</Typography>
+            <StyledLink to="/login">
+              <AccountCircleIcon sx={theme.MuiIcon} />
+              <Typography sx={linkTypographyStyle}>Login</Typography>
+            </StyledLink>
+          </LinkBox>
+        </NavInnerBox>
 
-                        </Link>
-                        <Link to='/wishlist' style={{ textTransform: 'none', textDecoration: 'none', color: '#202020',display:'flex',alignItems:'center',gap:'10px' }}  >
-                            <Badge badgeContent={4} color="secondary">
-                                <ShoppingCartIcon style={{width:'60px',height:'60px'}}/>
-                            </Badge>
-                            <Typography className='linkname'>Cart</Typography>
-
-                        </Link>
-                        <Link to='/wishlist' style={{ textTransform: 'none', textDecoration: 'none', color: '#202020',display:'flex',alignItems:'center',gap:'10px'}}  >
-                            <AccountCircleIcon style={{width:'60px',height:'60px'}}/>
-                            <Typography className='linkname'>Login</Typography>
-
-                        </Link>
-                    </LinkBox>
+        <BottomNav>
+          <Typography component={'p'}>50% OFF</Typography>
+          <Typography component={'p'}>Free shipping and returns</Typography>
+          <Typography component={'p'}>Different payment methods</Typography>
+        </BottomNav>
+      </NavbarMain>
+    </Box>
+  );
+};
 
 
-                </NavInnerBox>
+const linkTypographyStyle = {
+  fontSize: '16px',
+  fontWeight: 600,
+  
+};
 
-                <BottomNav>
-                    <Typography>50&OFF</Typography>
-                    <Typography>Free shopping and returns</Typography>
-                    <Typography>Different payment methods</Typography>
-                </BottomNav>
-            </NavbarMain>
-        </Box>
-    )
-}
 const NavbarMain = styled(AppBar)({
-    backgroundColor: '#ffffff',
-    height: '180px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    boxSizing: 'border-box',
-    fontFamily: 'Montserrat sans-serif',
+  backgroundColor: '#ffffff',
+  flexDirection: 'column',
+  boxSizing: 'border-box',
+  ...theme.customLayout.flexBetween,
+ 
+
 });
+
 const NavInnerBox = styled(Box)({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    padding: '0 200px 0 200px',
-    boxSizing: 'border-box'
-})
+ ...theme.customLayout.flexBetween,
+  width: '100%',
+  padding: '10px 100px',
+  boxSizing: 'border-box',
+  border:'1px solid red',
+   [theme.breakpoints.down('md')]:{
+    padding: '10px 50px',
+  }
+});
+
 const LinkBox = styled(Box)({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap:"50px",
-    "& .linkname": {
-        fontSize: '30px',
-        fontWeight: 600,
-        fontFamily: "Open Sans, sans-serif",
-    }
-})
+  ...theme.customLayout.flexAlignItemCenter,
+  gap: '50px',
+  [theme.breakpoints.down('md')]:{
+    gap: '10px',
+  }
+});
+
+const StyledLink = styled(Link)({
+  ...theme.customLayout.flexAlignItemCenter,
+  gap: '10px',
+  color: '#202020',
+...theme.LinkStyle
+});
+
 const BottomNav = styled(Box)({
-    width: '100%',
-    height: '60px',
-    backgroundColor: '#202020',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-evenly',
-    padding:'10px 0 10px 0',
-    boxSizing:'border-box',
-    "& p":{
-      fontFamily: "Open Sans, sans-serif",
-    fontSize: '25px',
-    fontWeight: 500,  
-    }
-    
+  width: '100%',
+  height: '30px',
+  backgroundColor: '#202020',
+  ...theme.customLayout.flexAlignItemCenter,
+  justifyContent: 'space-evenly',
+  padding: '10px 0',
+  boxSizing: 'border-box',
+  "& p": {
+    color: '#ffffff',
+  },
 });
