@@ -69,7 +69,6 @@ const NavInnerBox = styled(Box)({
   width: '100%',
   padding: '10px 100px',
   boxSizing: 'border-box',
-  border:'1px solid red',
    [theme.breakpoints.down('md')]:{
     padding: '10px 50px',
   }

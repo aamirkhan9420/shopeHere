@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ProductInterFace, ProductType } from '../../types/SliceTypes'
+import { ProductInterFace} from '../../types/SliceTypes'
 
 const initialState: ProductInterFace = {
     data: [],
@@ -10,7 +10,7 @@ const initialState: ProductInterFace = {
 export const FetchProducts = createAsyncThunk<[]>('products/fetchProducts', async (_, { rejectWithValue }) => {
     try {
         const res = await axios.get('https://shoppehere.onrender.com/product/productList')
-        return res.data
+        return res.data.data
     } catch (error) {
         if (axios.isAxiosError(error)) {
             return rejectWithValue(error.message);
@@ -22,17 +22,17 @@ export const FetchProducts = createAsyncThunk<[]>('products/fetchProducts', asyn
 const productSlice = createSlice({
     name: 'products', initialState, reducers: {}, extraReducers: (builder) => {
         builder.addCase(FetchProducts.pending, (state) => {
-            state.isErr = false,
+            state.isErr = false
                 state.loading = true
         })
         builder.addCase(FetchProducts.fulfilled, (state, action: PayloadAction<[]>) => {
-            state.isErr = false,
-                state.data = action.payload,
+            state.isErr = false
+                state.data = action.payload
                 state.loading = false
         })
         builder.addCase(FetchProducts.rejected, (state) => {
-            state.isErr = true,
-                state.data = [],
+            state.isErr = true
+                state.data = []
                 state.loading = false
         })
     }
