@@ -5,6 +5,8 @@ import { styled } from '@mui/material/styles';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import MenuIcon from '@mui/icons-material/Menu';
+
 import { Logo } from './Logo';
 import theme from './ThemeProvider';
 
@@ -12,8 +14,8 @@ import theme from './ThemeProvider';
 
 export const Navbar = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <NavbarMain position="static">
+    <Box sx={{ flexGrow: 1,position:'sticky' ,zIndex:10000,mb:'118px'}}>
+      <NavbarMain >
         <NavInnerBox>
             <StyledLink to="/">
             <Logo />
@@ -36,8 +38,9 @@ export const Navbar = () => {
               <Typography sx={linkTypographyStyle}>Login</Typography>
             </StyledLink>
           </LinkBox>
+           <MenuIcon sx={{...theme.MuiIcon,...theme.customLayout.ColorBlack}} />
         </NavInnerBox>
-
+       
         <BottomNav>
           <Typography component={'p'}>50% OFF</Typography>
           <Typography component={'p'}>Free shipping and returns</Typography>
@@ -56,7 +59,7 @@ const linkTypographyStyle = {
 };
 
 const NavbarMain = styled(AppBar)({
-  backgroundColor: '#ffffff',
+ ...theme.customLayout.BackGroundColorWhite,
   flexDirection: 'column',
   boxSizing: 'border-box',
   ...theme.customLayout.flexBetween,
@@ -71,7 +74,8 @@ const NavInnerBox = styled(Box)({
   boxSizing: 'border-box',
    [theme.breakpoints.down('md')]:{
     padding: '10px 50px',
-  }
+  },
+  
 });
 
 const LinkBox = styled(Box)({
@@ -79,25 +83,26 @@ const LinkBox = styled(Box)({
   gap: '50px',
   [theme.breakpoints.down('md')]:{
     gap: '10px',
+  },
+  [theme.breakpoints.down('sm')]:{
+    display:'none'
   }
 });
 
 const StyledLink = styled(Link)({
   ...theme.customLayout.flexAlignItemCenter,
   gap: '10px',
-  color: '#202020',
+  ...theme.customLayout.ColorBlack,
 ...theme.LinkStyle
 });
 
 const BottomNav = styled(Box)({
   width: '100%',
   height: '30px',
-  backgroundColor: '#202020',
+   ...theme.customLayout.BackGroundColorBlack,
   ...theme.customLayout.flexAlignItemCenter,
   justifyContent: 'space-evenly',
   padding: '10px 0',
   boxSizing: 'border-box',
-  "& p": {
-    color: '#ffffff',
-  },
+ 
 });

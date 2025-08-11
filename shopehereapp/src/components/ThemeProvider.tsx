@@ -8,6 +8,10 @@ declare module '@mui/material/styles' {
             flexCenter: object;
             flexBetween: object;
             flexAlignItemCenter: object;
+            BackGroundColorWhite:object;
+            BackGroundColorBlack:object;
+            ColorWhite:object;
+            ColorBlack:object;
         };
         MuiIcon: object;
         LinkStyle: object;
@@ -18,6 +22,10 @@ declare module '@mui/material/styles' {
             flexCenter?: object;
             flexBetween?: object;
             flexAlignItemCenter: object;
+            BackGroundColorWhite:object;
+            BackGroundColorBlack:object;
+            ColorWhite:object;
+            ColorBlack:object;
         };
         MuiIcon: object;
         LinkStyle: object
@@ -39,7 +47,7 @@ const theme = createTheme({
     components: {
         
         MuiTypography: {
-            variants: [{ props: { component: 'p' }, style: { fontSize: '14px', fontWeight: 500, } }]
+            variants: [{ props: { component: 'p' }, style: { fontSize: '14px', fontWeight: 500,color:'#ffffff' } }]
         }
     },
 
@@ -61,6 +69,11 @@ const theme = createTheme({
             alignItems: 'center',
             justifyContent: 'space-between',
         },
+        BackGroundColorWhite:{backgroundColor:'#ffffff'},
+        BackGroundColorBlack:{backgroundColor:'#202020'},
+        ColorWhite:{color:'#ffffff'},
+        ColorBlack:{color:'#202020',}
+
     },
 });
 
