@@ -11,11 +11,14 @@ import SwiperComp from '../components/SwiperComp'
 const Home = () => {
   let dispatch =useDispatch<AppDispatch>()
   let {data,loading,isErr}=useSelector((state:RootState)=>state.products)
+  
+
   useEffect(()=>{
    dispatch(FetchProducts())
   },[dispatch])
   return (
-  <><SwiperComp />
+  <>
+  <SwiperComp />
       <Container sx={{py:4}} >
         <Grid container  spacing={{ xs: 2,sm:2, md: 5,lg:5 }} columns={{ xs: 6, sm: 8, md: 12 }}>
           {data?.length>0&&data?.map((product:ProductCardInterface,index:number)=>(
