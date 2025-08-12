@@ -2,7 +2,7 @@ import { Box, Card, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
 import { ProductCardInterface } from '../types/Common'
 
-export const ProductCard = ({ name, img, text, color, price, onClick }: ProductCardInterface) => {
+export const ProductCard = ({ name, img, color, price, onClick }: ProductCardInterface) => {
     return (
         <Card
             sx={{
