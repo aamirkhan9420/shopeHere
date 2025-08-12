@@ -8,7 +8,7 @@ const initialState: ProductInterFace = {
 }
 export const FetchProductBanner = createAsyncThunk('products/fetchProductsBanner', async (_, { rejectWithValue }) => {
     try {
-        let data = await axios.get('https://shoppehere.onrender.com/product/bannerdata')
+        let data = await axios.get('https://shoppehere.onrender.com/banner/bannerdata')
         return data?.data?.data
 
     } catch (error) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -6,7 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import theme from './ThemeProvider';
 
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { Navigation, Pagination, Mousewheel, Keyboard, EffectCards } from 'swiper/modules';
 import styled from '@emotion/styled';
 import { AppDispatch, RootState } from '../store';
 import { useSelector } from 'react-redux';
@@ -14,33 +14,16 @@ import { useDispatch } from 'react-redux';
 import { FetchProductBanner } from '../features/products/ProductBannerSlice';
 
 const SwiperComp = () => {
-  let {data,loading,isErr}=useSelector((state:RootState)=>state.banner)
-  let dispatch =useDispatch<AppDispatch>()
-  const sliderData = [
-    {
-      id: "0",
-      "img": 'https://i.ibb.co/qMTYfD0h/shoe1.jpg',
-      text: "Summers SALE up to 50% OFF what are you wating for",
-    },
-    {
-      id: "1",
-      img: "https://i.ibb.co/Q3TFgKf8/shoe2.jpg",
-      text: "AUTUMN is coming, choose what suits you THE BEST",
-    },
-    {
-      id: "2",
-      img: 'https://i.ibb.co/5WsKqkJ4/shoe3.jpg',
-      text: "Make your feet as comfortable as walking on the beach",
-    },
-    {
-      id: "3",
-      img: 'https://i.ibb.co/bRPtG3Dc/shoe4.jpg',
-      text: "Choose between basketball and fashion or choose both",
-    },
-  ];
-  useEffect(()=>{
-   dispatch(FetchProductBanner())
-  },[dispatch])
+  let { data, loading, isErr } = useSelector((state: RootState) => state.banner)
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 600);
+  let dispatch = useDispatch<AppDispatch>()
+
+  useEffect(() => {
+    dispatch(FetchProductBanner())
+    const handleResize = () => setIsSmallScreen(window.innerWidth <= 600);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [dispatch])
   return (
     <>
       <StyledSwiper
@@ -50,16 +33,16 @@ const SwiperComp = () => {
         }}
         navigation={true}
         keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
         className="mySwiper"
-        effect='slide'
-        speed={700}
+        speed={600}
+        effect={isSmallScreen ? 'cards' : 'slide'}
+        modules={[Navigation, Pagination, Mousewheel, Keyboard, EffectCards]}
       >
-        {sliderData.map((ele) => (
-          <SwiperSlide>
+        {data?.length > 0 && data?.map((ele) => (
+          <SwiperSlide key={ele.id}>
             <SlideWrapper>
               <SlideImage src={ele.img} />
-              <SlideText>{ele.text}</SlideText>
+              <SlideText>{ele.offerText}</SlideText>
             </SlideWrapper>
           </SwiperSlide>
         ))}

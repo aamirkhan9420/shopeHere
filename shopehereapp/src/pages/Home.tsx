@@ -17,7 +17,7 @@ const Home = () => {
    dispatch(FetchProducts())
   },[dispatch])
   return (
-  <>
+    <>
   <SwiperComp />
       <Container sx={{py:4}} >
         <Grid container  spacing={{ xs: 2,sm:2, md: 5,lg:5 }} columns={{ xs: 6, sm: 8, md: 12 }}>

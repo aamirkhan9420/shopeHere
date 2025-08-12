@@ -9,5 +9,11 @@ export interface ProductCardInterface{
     text:string,
     price:number|string,
     color:string[],
+    type: string,
+    size: string[],
+    gender: string,
+    inCart:false,
+    quantity:number,
+    offerText:string
     onClick?:()=>void
 }
